@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyShop.Core.Models;
+using MyShop.Core.ViewModels;
 using MyShop.DataAccess.InMemory;
 
 
@@ -12,9 +13,12 @@ namespace MyShop.WebUI.Controllers
     public class ProductManagerController : Controller
     {
         ProductRepostory context;
+        // this is added to get the product categoires from from database 
+        ProductCategoryRepository productCategories;
 
         public ProductManagerController() {
             context = new ProductRepostory();
+            productCategories = new ProductCategoryRepository();
         }
 
         // GET: ProductManager and displays a list 
@@ -29,8 +33,21 @@ namespace MyShop.WebUI.Controllers
         // this first part calls the create page with an empty form 
         public ActionResult Create()
         {
-            Product product = new Product();
-            return View(product);
+            // with a view model this becomes 
+            // first we need to initalise the view model 
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+
+            // then we need to create the empty product from the view model 
+            viewModel.Product = new Product();
+            // then because the view model also includes a property of product categories we can call it 
+            viewModel.productCategories = productCategories.Collection();
+
+            // now we return the view model not the product model 
+            return View(viewModel);
+
+            // This is without the view model 
+            //Product product = new Product();
+            //return View(product);
         }
 
         // This creates the add page after it has been submited 
@@ -61,7 +78,11 @@ namespace MyShop.WebUI.Controllers
             }
             else
             {
-                return View(product);
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+                viewModel.Product = product;
+                viewModel.productCategories = productCategories.Collection();
+
+                return View(viewModel);
             }
         }
 
