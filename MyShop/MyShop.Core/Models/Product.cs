@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace MyShop.Core.Models
 {
-    public class Product
+    public class Product : BaseEntity
     {
-        public string Id { get; set; }
+        // removed becuase this now uses the Base entity which creates the ID
+        //public string Id { get; set; }
 
         [StringLength(20)]
         [DisplayName("Product Name")]
@@ -22,11 +23,12 @@ namespace MyShop.Core.Models
         public string Category { get; set; }
         public string Image { get; set; }
 
+        // This is no longer needed as the Base Entity class does this 
         // This is a constructor that ensures that an ID is generated  when the model is called 
-        public Product()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
+        //public Product()
+       // {
+       //     this.Id = Guid.NewGuid().ToString();
+       // }
 
     }
 

@@ -41,8 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProductCategoryRepository.cs" />
-    <Compile Include="ProductRepostory.cs" />
+    <Compile Include="InMemoryRepository.cs" />
+    <Compile Include="xProductCategoryRepository.cs" />
+    <Compile Include="xProductRepostory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
