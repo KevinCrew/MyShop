@@ -1,4 +1,5 @@
-﻿using MyShop.Core.Models;
+﻿using MyShop.Core.Contracts;
+using MyShop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace MyShop.DataAccess.InMemory
     // this is to ccreate a generic repository 
     // <T> is a placeholder and can be called whatever you want as it will be replaced at RunTime
     // Where T : BaseEntity - this means that T will always call the Base Entity class to get an ID 
-    public class InMemoryRepository<T> where T : BaseEntity 
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity 
     {
         // This creates the memory cahe 
         ObjectCache cache = MemoryCache.Default;
